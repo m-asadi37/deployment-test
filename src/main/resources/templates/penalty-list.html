@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Penalty List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h1 class="mb-4">Penalty List</h1>
+
+    <form th:action="@{/penalty/list}" method="get" class="row g-3 mb-4">
+        <div class="col-auto">
+            <label for="plate" class="form-label">Plate Number</label>
+            <input type="text" id="plate" name="plate" class="form-control">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mt-4">Search</button>
+        </div>
+    </form>
+
+    <a th:href="@{/penalty/new}" class="btn btn-success mb-3">Add New Penalty</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Subject</th>
+            <th>Amount</th>
+            <th>Occur Time</th>
+            <th>Car Plate</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p: ${list}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.subject}"></td>
+            <td th:text="${p.amount}"></td>
+            <td th:text="${p.occurTime}"></td>
+            <td th:text="${p.car.plate}"></td>
+            <td>
+                <a th:href="@{/penalty/detail(id=${p.id})}" class="btn btn-outline-primary btn-sm">Edit</a>
+                <a th:href="@{/penalty/doRemove(id=${p.id})}" class="btn btn-outline-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
