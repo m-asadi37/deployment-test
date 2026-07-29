@@ -41,6 +41,12 @@ jobs:
           name: app-jar
           path: target
 
+      - name: Debug files
+        run: |
+          pwd
+          ls -R
+          find . -type f
+
       - name: Copy files to server
         uses: appleboy/scp-action@v0.1.7
         with:
