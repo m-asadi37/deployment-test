@@ -3,8 +3,8 @@ name: jar-publish.yml
 on:
   workflow_dispatch:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
 
 jobs:
 
@@ -53,10 +53,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          source: |
-            Dockerfile
-            docker-compose.yml
-            target/*.jar
+          source: "Dockerfile,docker-compose.yml,target/traffic-violation-system-0.0.1-SNAPSHOT.jar"
           target: /opt/traffic-system
 
       - name: Deploy
